@@ -10,8 +10,6 @@ Ubuntu 18.04
 </br>
 Python
 </br>
-Keras2.4.3
-</br>
 硬體設備:
 </br>
 CPU:intel i7-9700
