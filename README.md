@@ -1,8 +1,4 @@
-# Regression Report_109368011
-
-Kaggle Competition page:[LINK](https://www.kaggle.com/c/machine-learning-ntut-2020-autumn-classification/leaderboard)
-Rank(11/152):  
-![rank](rank.png)
+# Classification Report_109318137
 
 ## 1.作法說明
 
@@ -12,15 +8,16 @@ Rank(11/152):
 </br>
 Ubuntu 18.04
 </br>
-Anaconda-Jupyter Notbook
+Python
 </br>
 Keras2.4.3
 </br>
 硬體設備:
 </br>
-CPU:I7 8700
+CPU:intel i7-9700
 </br>
-GPU:GTX1070 Ti 8G
+GPU:GeForce RTX 2080 Ti 
+
 
 1. 本次作業沒有驗證集，在訓練模型時需自行從測試集分出部分資料當作驗證集。
 </br>
