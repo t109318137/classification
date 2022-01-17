@@ -26,8 +26,6 @@ GPU:GeForce RTX 2080 Ti
 3. 最後將test data放進模型做預測，再將結果寫入csv檔後上傳kaggle集完成本次作業。
 </br>
 
-4. 最後上傳kaggle的public score最高為0.99663，private score為0.99711![Kaggle_score](kaggle_score.png)
-
 
 ## 2.程式方塊圖與寫法
 程式方塊圖如下:
