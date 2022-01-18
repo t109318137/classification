@@ -34,27 +34,27 @@ GPU:GeForce RTX 2080 Ti
  - Import moudules
     ```py
     # 匯入相關所需的模組
-import numpy as np
-import h5py
-import glob
+    import numpy as np
+    import h5py
+    import glob
 
-import sklearn.metrics
-import tensorflow.keras.optimizers
-import os
+    import sklearn.metrics
+    import tensorflow.keras.optimizers
+    import os
 
-from sklearn.model_selection import train_test_split
-from keras.utils import np_utils
-import keras
-from keras.preprocessing.image import ImageDataGenerator
-from keras.callbacks import ModelCheckpoint,LearningRateScheduler
-from keras.models import Sequential
-from keras.layers import Dense,Dropout,Activation,Flatten,BatchNormalization,MaxPool2D
-from keras.layers import Conv2D,MaxPooling2D
-import cv2
+    from sklearn.model_selection import train_test_split
+    from keras.utils import np_utils
+    import keras
+    from keras.preprocessing.image import ImageDataGenerator
+    from keras.callbacks import ModelCheckpoint,LearningRateScheduler
+    from keras.models import Sequential
+    from keras.layers import Dense,Dropout,Activation,Flatten,BatchNormalization,MaxPool2D
+    from keras.layers import Conv2D,MaxPooling2D
+    import cv2
 
-from keras.applications.resnet import ResNet50
-from keras.applications.vgg16 import VGG16
-from keras.callbacks import ModelCheckpoint, EarlyStopping
+    from keras.applications.resnet import ResNet50
+    from keras.applications.vgg16 import VGG16
+    from keras.callbacks import ModelCheckpoint, EarlyStopping
     ```
  - Load data
     將照片讀取出來，並縮放成64*64的大小來避免記憶體用量過高與加快訓練時間
