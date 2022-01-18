@@ -60,36 +60,59 @@ GPU:GeForce RTX 2080 Ti
     將照片讀取出來，並縮放成64*64的大小來避免記憶體用量過高與加快訓練時間
     ```py
 
-    def read_images_labels(path,i):
-        for file in os.listdir(path):
-            abs_path=os.path.abspath(os.path.join(path,file))
-            if os.path.isdir(abs_path):
-                i+=1
-                temp=os.path.split(abs_path)[-1]
-                name.append(temp)
-                read_images_labels(abs_path,i)
-                amount=int(len(os.listdir(path)))
-                sys.stdout.write('\r'+'>'*(i)+' '*(amount-i)+'[%s%%]'%(i*100/amount)+temp)
-            else:
-                if file.endswith('.jpg'):
-                    image = cv2.resize(cv2.imread(abs_path),(64,64))
-                    images.append(image)
-                    labels.append(i-1)
-        return images, labels, name 
+    def load_pictures():
+    pics = []
+    labels = []
 
-    def read_main(path):
-        images, labels, name = read_images_labels(path,i=0)
-        images=np.array(images,dtype=np.float32)/255
-        labels=np_utils.to_categorical(labels, num_classes=20)
-        np.savetxt('name.txt',name,delimiter=' ',fmt="%s")
-        return images, labels
+    for k, v in dict_characters.items():
+        pictures=[k for k in glob.glob(imgsPath + "/" + v + "/*")]
+        print(v + " : " + str(len(pictures)))
+        for i,pic in enumerate(pictures):
+            tmp_img = cv2.imread(pic)
 
-    images=[]
-    labels=[]
-    name=[]
-    images,labels=read_main('simpsondata/train/characters-20')
-    X_train,X_test,Y_train,Y_test=train_test_split(images,labels,test_size=0.2) #將資料拆分成訓練集與驗證集
 
+            tmp_img = cv2.cvtColor(tmp_img, cv2.COLOR_BGR2RGB)
+            tmp_img = cv2.resize(tmp_img,(img_height,img_width))
+            pics.append(tmp_img)
+            labels.append(k)
+    return np.array(pics),np.array(labels)
+
+    def get_dataset(save =False, load = False):
+        if(load):
+            h5f = h5py.File('train60.h5','r')
+            X_train = h5f['X_train'][:]
+            X_test = h5f['X_test'][:]
+            h5f.close()
+
+            h5f = h5py.File('valid60.h5','r')
+            y_train=h5f['y_train'][:]
+            y_test = h5f['y_test'][:]
+            h5f.close()
+        else:
+
+            X,y= load_pictures()
+            y= keras.utils.np_utils.to_categorical(y,num_classes)
+
+            X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=test_size)
+            if save:
+                h5f=h5py.File('train60.h5','w')
+                h5f.create_dataset('X_train',data=X_train)
+                h5f.create_dataset('X_test',data=X_test)
+                h5f.close()
+
+                h5f = h5py.File('valid60.h5','w')
+                h5f.create_dataset('y_train',data=y_train)
+                h5f.create_dataset('y_test', data=y_test)
+                h5f.close()
+
+        X_train = X_train.astype('float32')/255.
+        X_test = X_test.astype('float32')/255.
+        print("Train",X_train.shape,y_train.shape)
+        print("Valid",X_test.shape,y_test.shape)
+
+        return X_train,X_test,y_train,y_test
+    X_train,X_test,y_train,y_test=get_dataset(save=True,load=False)
+    datagen = ImageDataGenerator(shear_range=0.2,zoom_range=0.2,horizontal_flip=True)
     ```
     
 - model construction
