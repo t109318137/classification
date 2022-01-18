@@ -34,37 +34,27 @@ GPU:GeForce RTX 2080 Ti
  - Import moudules
     ```py
     # 匯入相關所需的模組
-    import os,sys
-    import numpy as np
-    import cv2
-    import matplotlib.pyplot as plt
-    from PIL import Image
-    from random import shuffle
-    os.environ['CUDA_VISIBLE_DEVICES']='0'
-    from sklearn.model_selection import train_test_split
+  import numpy as np
+  import h5py
+  import glob
 
-    import tensorflow as tf
-    from keras.preprocessing.image import ImageDataGenerator
-    from keras.callbacks import ModelCheckpoint
-    from keras.models import Sequential
-    from keras.layers import *
-    from keras.optimizers import *
-    from keras import utils as np_utils
+  import sklearn.metrics
+  import tensorflow.keras.optimizers
+  import os
 
-    def solve_cudnn_error():    #用來解決訓練時發生的cudnn錯誤
-        gpus = tf.config.experimental.list_physical_devices('GPU')
-        if gpus:
-            try:
-                # Currently, memory growth needs to be the same across GPUs
-                for gpu in gpus:
-                    tf.config.experimental.set_memory_growth(gpu, True)
-                logical_gpus = tf.config.experimental.list_logical_devices('GPU')
-                print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
-            except RuntimeError as e:
-                # Memory growth must be set before GPUs have been initialized
-                print(e)
+  from sklearn.model_selection import train_test_split
+  from keras.utils import np_utils
+  import keras
+  from keras.preprocessing.image import ImageDataGenerator
+  from keras.callbacks import ModelCheckpoint,LearningRateScheduler
+  from keras.models import Sequential
+  from keras.layers import Dense,Dropout,Activation,Flatten,BatchNormalization,MaxPool2D
+  from keras.layers import Conv2D,MaxPooling2D
+  import cv2
 
-    solve_cudnn_error() 
+  from keras.applications.resnet import ResNet50
+  from keras.applications.vgg16 import VGG16
+  from keras.callbacks import ModelCheckpoint, EarlyStopping 
     ```
  - Load data
     將照片讀取出來，並縮放成64*64的大小來避免記憶體用量過高與加快訓練時間
