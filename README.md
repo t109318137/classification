@@ -30,7 +30,7 @@ GPU:GeForce RTX 2080 Ti
 ## 2.程式方塊圖與寫法
 程式方塊圖如下:
 </br>
-![程式方塊圖]()
+![程式方塊圖](flow.png)
  - Import moudules
     ```py
     # 匯入相關所需的模組
