@@ -121,31 +121,31 @@ GPU:GeForce RTX 2080 Ti
 
     ```py
     def creat_model():
-     input_shape = (img_height,img_width,3)
-     model = Sequential()
-     model.add(Conv2D(32,kernel_size=(3,3),padding='same',activation='relu',input_shape=input_shape))
-     model.add(Conv2D(32,kernel_size=(3,3),padding='Same',activation='relu'))
-     model.add(MaxPool2D(pool_size=(2,2)))
-     model.add(BatchNormalization())
+        input_shape = (img_height,img_width,3)
+        model = Sequential()
+        model.add(Conv2D(32,kernel_size=(3,3),padding='same',activation='relu',input_shape=input_shape))
+        model.add(Conv2D(32,kernel_size=(3,3),padding='Same',activation='relu'))
+        model.add(MaxPool2D(pool_size=(2,2)))
+        model.add(BatchNormalization())
 
-     model.add(Conv2D(64,kernel_size=(3,3),padding='Same',activation='relu'))
-     model.add(Conv2D(64, kernel_size=(3, 3), padding='Same', activation='relu'))
-     model.add(MaxPool2D(pool_size=(2,2)))
-     model.add(BatchNormalization())
+        model.add(Conv2D(64,kernel_size=(3,3),padding='Same',activation='relu'))
+        model.add(Conv2D(64, kernel_size=(3, 3), padding='Same', activation='relu'))
+        model.add(MaxPool2D(pool_size=(2,2)))
+        model.add(BatchNormalization())
 
-     model.add(Conv2D(86, kernel_size=(3, 3), padding='Same', activation='relu'))
-     model.add(Conv2D(86, kernel_size=(3, 3), padding='Same', activation='relu'))
-     model.add(MaxPool2D(pool_size=(2, 2)))
-     model.add(BatchNormalization())
-     model.add(Flatten())
+        model.add(Conv2D(86, kernel_size=(3, 3), padding='Same', activation='relu'))
+        model.add(Conv2D(86, kernel_size=(3, 3), padding='Same', activation='relu'))
+        model.add(MaxPool2D(pool_size=(2, 2)))
+        model.add(BatchNormalization())
+        model.add(Flatten())
 
-     model.add(Dense(1024,activation="relu"))
-     model.add(Dense(512, activation="relu"))
-     model.add(Dense(50,activation="softmax"))
+        model.add(Dense(1024,activation="relu"))
+        model.add(Dense(512, activation="relu"))
+        model.add(Dense(50,activation="softmax"))
 
-     optimizer = 'Adam'
-     model.compile(optimizer=optimizer,loss="categorical_crossentropy",metrics=["accuracy"])
-     return 
+        optimizer = 'Adam'
+        model.compile(optimizer=optimizer,loss="categorical_crossentropy",metrics=["accuracy"])
+        return 
     ```
     模型資訊如下
 
