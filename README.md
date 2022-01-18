@@ -152,7 +152,7 @@ GPU:GeForce RTX 2080 Ti
 
     模型建置參數如下，這邊callback函數使用了checkpoint來將訓練過程中validat_accuracy最高的epoch的權重儲存起來。
 
-    ```py
+
     model.compile(loss='categorical_crossentropy',
              optimizer='adam',
              metrics=['accuracy'])
